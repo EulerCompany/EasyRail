@@ -1,0 +1,67 @@
+Table Users{
+  Id int [pk, increment]
+  Name varchar [not null]
+  Surname varchar [not null]
+  Email varchar 
+  //Payment data
+}
+
+
+//Доделать
+Table Payment {
+  Id int [pk]
+  UserId int [not null, ref: > Users.Id]
+}
+
+
+Table Routes
+{
+  Id int [pk, increment]
+  Description varchar [not null]
+  
+}
+
+Table RoutesStations
+{
+  Id int [pk, increment]
+  StationId int [not null, ref: > Stations.Id]
+  RouteId int [not null, ref: > Routes.Id]
+  StationOrderInRoute int
+}
+
+Table Tickets
+{
+  Id int [pk, increment]
+  Description varchar [not null]
+  RouteId int [not null, ref: > Routes.Id]
+  FirstStationId int [not null, ref: > Stations.Id]
+  LastStationId int [not null, ref: > Stations.Id]
+  UserId int [not null, ref: > Users.Id]
+
+  DepartureTime datetime
+  ArrivalTime datetime
+  
+  Class varchar(10) [not null]
+  
+  
+}
+
+Table Trains {
+  Id int [pk, increment]
+  Description varchar [not null]
+  RouteId int [not null, ref: > Routes.Id]
+}
+
+
+Table Stations
+{
+  Id int [pk, increment]
+  Name varchar [not null]
+  CityId int [not null, ref: > Cities.Id]
+}
+
+Table Cities
+{
+  Id in [pk, increment]
+  Name varchar [not null]
+}
